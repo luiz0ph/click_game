@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Arquivo CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Click game</title>
+</head>
+<body>
+    <header>
+        <h1>Click-me</h1>
+    </header>
+    <main>
+        <div id="sombra">
+            <!-- Circulo de click -->
+            <div id="circle" onclick="atualizarPontuacao()">
+                
+            </div>
+        </div>
+        <p>Score: <span id="score">0</span></p>
+
+        <div id="compras">
+            <span id="dobro_pontos">Dobro de pontos</span><button id="btn_dobro">Comprar</button> <br>
+            <p class="price">100 pontos</p>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
