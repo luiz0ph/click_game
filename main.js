@@ -1,4 +1,4 @@
-let score = 96;
+let score = -1;
 let dobro_pontos = document.getElementById('dobro_pontos');
 let btn_dobroPontos = document.querySelector('button#btn_dobro');
 let compras = document.querySelector('div#compras');
