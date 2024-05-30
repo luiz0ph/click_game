@@ -12,13 +12,30 @@ body {
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 h1 {
     margin: 20px 0;
     font-size: 39px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+
+#clicker {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #606060;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 8px #00000070;
+    margin: 20px 0;
+    width: 80vw;
 }
 
 div#sombra {
@@ -38,6 +55,7 @@ div#circle {
     width: 160px;
     height: 160px;
     border-radius: 50%;
+
 }
 
 p {
@@ -51,14 +69,24 @@ span {
     font-weight: bolder;
 }
 
-#compras > span {
+
+.compras > span {
     font-size: 17px;
     font-weight: bold;
 }
 
-#compras > p {
+.compras > p {
     font-size: 17px;
     font-weight: bold;
+    display: inline-block;
+}
+
+.mercado {
+    background-color: #606060;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 8px #00000070;
+    width: 80vw;
 }
 
 
@@ -74,4 +102,20 @@ button {
 
 .price::before {
     content: 'Valor: ';
+}
+
+@media screen  and (min-width: 1000px){
+    main {
+        display: flex;
+        justify-content: space-between;
+        width: 80vw;
+    }
+
+    #clicker {
+        width: 50vw;
+    }
+
+    .mercado {
+        width: 25vw;
+    }
 }

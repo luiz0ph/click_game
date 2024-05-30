@@ -11,21 +11,36 @@
     <title>Click game</title>
 </head>
 <body>
-    <header>
-        <h1>Click-me</h1>
-    </header>
     <main>
-        <div id="sombra">
-            <!-- Circulo de click -->
-            <div id="circle" onclick="atualizarPontuacao()">
-                
+        <div id="clicker">
+            <h1>Click-me</h1>
+            <div id="sombra">
+                <!-- Circulo de click -->
+                <div id="circle" onclick="atualizarPontuacao()">
+            
+                </div>
             </div>
+            <p>Score: <span id="score">0</span></p>
         </div>
-        <p>Score: <span id="score">0</span></p>
 
-        <div id="compras">
-            <span id="dobro_pontos">Dobro de pontos</span><button id="btn_dobro">Comprar</button> <br>
-            <p class="price">100 pontos</p>
+        <div class="mercado">
+            <div id="dobro" class="compras">
+                <span id="dobro_pontos">Dobro de pontos</span>
+                <button id="btn_dobro">Comprar</button> <br>
+                <p class="price" id="price_dobro">100 pontos</p>
+            </div>
+
+            <div id="1PorSegundo" class="compras">
+                <span>1 ponto por segundo</span>
+                <button id="btn_1segundo">Comprar</button> <br>
+                <p class="price">500 pontos</p>
+            </div>
+
+            <div id="triplo" class="compras">
+                <span id="triplo_pontos">Triplo pontos</span>
+                <button id="btn_triplo">Comprar</button> <br>
+                <p class="price" id="price_triplo">700 pontos</p>
+            </div>
         </div>
     </main>
 
