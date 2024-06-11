@@ -1,22 +1,32 @@
 let score = -1;
-let btn_dobroPontos = document.querySelector('button#btn_dobro');
+let btnDobroPontos = document.querySelector('button#btn_dobro');
 let dobroCompra = document.getElementById('dobro');
-let UmPorSegundo = document.getElementById('1PorSegundo');
-let btn_1porSegundo = document.getElementById('btn_1segundo');
-let triploCompra = document.getElementById('triplo');
-let btn_triploPontos = document.getElementById('btn_triplo');
-let compras = document.querySelector('div#compras');
+let btnTriploPontos = document.querySelector("button#btn_triplo");
+let triploCompra = document.querySelector("div#triplo");
+let btnQuadruploPontos = document.querySelector("button#btn_quadruplo");
+let quadruploCompra = document.querySelector("div#quadruplo");
+let UmPorSegundo = document.getElementById('1_por_segundo');
+let btn1PorSegundo = document.getElementById('btn_1segundo');
+let doisPorSegundo = document.getElementById("2_por_segundo");
+let btn2PorSegundo = document.querySelector("button#btn_2segundo");
+let compras = document.querySelectorAll('div#compras');
+let mercado = document.querySelector("div#mercado");
+let botao = document.getElementById('circle');
 let ponto = 0;
 let TempoSegundo = 0;
 
-/*
-    ponto 0 == aumenta 1 
-    ponto 1 == dobro de pontos
-    ponto 2 == triplo de pontos
+// Deixar visivel
+dobroCompra.style.display = "block";
+UmPorSegundo.style.display = "block"
 
-    tempo 0 == não aumenta nada
-    tempo 1 == aumenta 1 ponto por segundo
-*/
+botao.addEventListener('click', somClick);
+
+const audioElement = document.getElementById('somClick');
+// Som do click
+function somClick() {
+    audioElement.play(); // Inicia a reprodução
+    audioElement.volume = 0.3; 
+}
 
 // Função de dobro de ponto
 function dobro() {
@@ -25,21 +35,9 @@ function dobro() {
     } else {
         ponto = 1;
         score -= 100; // Retira 100 pontos
-        document.getElementById('score').innerHTML = score; // Atualiza o valor na hora
-        dobroCompra.style.display = 'none';
-    }
-}
-
-// Função 1 ponto por segundo
-function tempoPorSegundo() {
-    if (score < 500) {
-        window.alert('Valor Insuficiente');
-    } else {
-        TempoSegundo = 1;
-        score -= 500;
-        document.getElementById('score').innerHTML = score;
-        UmPorSegundo.style.display = 'none';
-        atualizarTempo();
+        document.getElementById('score').innerHTML = score; // Atualiza o valor ao comprar
+        dobroCompra.style.display = "none";
+        triploCompra.style.display = "block";
     }
 }
 
@@ -52,12 +50,54 @@ function triplo() {
         score -= 700; // Retira 500 pontos
         document.getElementById('score').innerHTML = score;
         triploCompra.style.display = 'none';
+        quadruploCompra.style.display = 'block';
     }
 }
 
-btn_dobroPontos.addEventListener('click', dobro);
-btn_triploPontos.addEventListener('click', triplo);
-btn_1porSegundo.addEventListener('click', tempoPorSegundo);
+function quadruplo() {
+    if (score < 1000) {
+        window.alert('Valor insuficiente');
+    } else {
+        ponto = 3;
+        score -= 1000; // Retira mil pontos
+        document.getElementById('score').innerHTML = score;
+        quadruploCompra.style.display = 'none';
+    }
+}
+
+// Função 1 ponto por segundo
+function tempoPorSegundo1() {
+    if (score < 200) {
+        window.alert('Valor Insuficiente');
+    } else {
+        TempoSegundo = 1;
+        score -= 500;
+        document.getElementById('score').innerHTML = score;
+        UmPorSegundo.style.display = 'none';
+        doisPorSegundo.style.display = 'block';
+        atualizarTempo();
+    }
+}
+
+// 2 pontos por segundo
+function tempoPorSegundo2() {
+    if (score < 1200) {
+        window.alert('Valor insuficente');
+    } else {
+        TempoSegundo = 2;
+        score -= 1200
+        document.getElementById('score').innerHTML = score;
+        doisPorSegundo.style.display = 'none';
+        atualizarTempo();
+    }
+}
+
+// Adciona um ouvinte de click nos botões de compra
+btnDobroPontos.addEventListener('click', dobro);
+btnTriploPontos.addEventListener('click', triplo);
+btnQuadruploPontos.addEventListener('click', quadruplo);
+btn1PorSegundo.addEventListener('click', tempoPorSegundo1);
+btn2PorSegundo.addEventListener('click', tempoPorSegundo2);
 
 // Função para atualizar a pontuação
 function atualizarPontuacao() {
@@ -65,11 +105,14 @@ function atualizarPontuacao() {
         case 0:
             score++;
             break
-        case 1:
+        case 1: // Dobro de pontos
             score += 2;
             break
-        case 2:
+        case 2: // Triplo de pontos 
             score += 3;
+            break
+        case 3: // Quadruplo de pontos
+            score += 4;
             break
         default:
             score++
@@ -78,21 +121,38 @@ function atualizarPontuacao() {
     document.getElementById('score').innerHTML = score;
 }
 
-function tempo_1() {
-    score++;
-    document.getElementById('score').innerHTML = score;
-}
+/*
+    ponto 0 == aumenta 1 
+    ponto 1 == dobro de pontos
+    ponto 2 == triplo de pontos
+    ponto 3 == quadruplo de pontos
 
-function tempo_2() {
-    score += 2;
-    document.getElementById('score').innerHTML = score;
-}
+    tempo 0 == não aumenta nada
+    tempo 1 == aumenta 1 ponto por segundo
+    tempo 2 == aumenta 2 pontos por segundo
+*/
 
+
+let intervalId;
 function atualizarTempo() {
-    if (TempoSegundo == 1) {
-        setInterval(tempo_1, 1000);
-    } 
+    switch (TempoSegundo) {
+        case 0:
+            break
+        case 1:
+            clearInterval(intervalId); // Limpa o intervalo anterior
+            intervalId = setInterval(() => {
+                score++;
+                document.getElementById('score').innerHTML = score;
+            }, 1000) // Ganha 1 ponto a cada segundo
+            break
+        case 2:
+            clearInterval(intervalId);  // Limpa o intervalo anterior
+            intervalId = setInterval(() => {
+                score += 2;
+                document.getElementById('score').innerHTML = score;
+            }, 1000) // Ganha 2 ponto por segundo
+            break
+        default:
+            break
+    }
 }
-
-// Chama a função atualizarPontuacao para iniciar o processo
-atualizarPontuacao();

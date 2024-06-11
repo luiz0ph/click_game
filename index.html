@@ -10,7 +10,8 @@
 
     <title>Click game</title>
 </head>
-<body>
+<body onload="atualizarPontuacao()">
+
     <main>
         <div id="clicker">
             <h1>Click-me</h1>
@@ -19,27 +20,46 @@
                 <div id="circle" onclick="atualizarPontuacao()">
             
                 </div>
+                <audio id="somClick" src="som/somClick.mp3"></audio>
             </div>
             <p>Score: <span id="score">0</span></p>
         </div>
 
         <div class="mercado">
+
+            <!-- Dobro de pontos -->
             <div id="dobro" class="compras">
                 <span id="dobro_pontos">Dobro de pontos</span>
                 <button id="btn_dobro">Comprar</button> <br>
                 <p class="price" id="price_dobro">100 pontos</p>
             </div>
 
-            <div id="1PorSegundo" class="compras">
-                <span>1 ponto por segundo</span>
-                <button id="btn_1segundo">Comprar</button> <br>
-                <p class="price">500 pontos</p>
-            </div>
-
+            <!-- Triplo de pontos -->
             <div id="triplo" class="compras">
                 <span id="triplo_pontos">Triplo pontos</span>
                 <button id="btn_triplo">Comprar</button> <br>
                 <p class="price" id="price_triplo">700 pontos</p>
+            </div>
+
+            <!-- Quadruplo de pontos -->
+            <div id="quadruplo" class="compras">
+                <span id="quadruplo_pontos">Quadruplo pontos</span>
+                <button id="btn_quadruplo">Comprar</button> <br>
+                <p class="price" id="quadruplo_price">1000 pontos</p>
+            </div>
+
+            <!-- 1 ponto por segundo -->
+            <div id="1_por_segundo" class="compras">
+                <span>1 ponto por segundo</span>
+                <button id="btn_1segundo">Comprar</button> <br>
+                <p class="price">200 pontos</p>
+            </div>
+
+            <!-- 2 ponto por segundo -->
+            <div id="2_por_segundo" class="compras">
+                <span>2 pontos por segundo</span>
+                <button id="btn_2segundo">Compras</button> <br>
+                <p class="price">1200 pontos</p>
             </div>
         </div>
     </main>
