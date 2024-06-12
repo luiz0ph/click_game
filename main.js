@@ -9,6 +9,8 @@ let UmPorSegundo = document.getElementById('1_por_segundo');
 let btn1PorSegundo = document.getElementById('btn_1segundo');
 let doisPorSegundo = document.getElementById("2_por_segundo");
 let btn2PorSegundo = document.querySelector("button#btn_2segundo");
+let tresPorSegundo = document.getElementById("3_por_segundo");
+let btn3PorSegundo = document.querySelector("button#btn_3segundo");
 let compras = document.querySelectorAll('div#compras');
 let mercado = document.querySelector("div#mercado");
 let botao = document.getElementById('circle');
@@ -43,11 +45,11 @@ function dobro() {
 
 // Fução triplo de pontos
 function triplo() {
-    if (score < 700) {
+    if (score < 500) {
         window.alert('Valor insuficiente');
     } else {
         ponto = 2;
-        score -= 700; // Retira 500 pontos
+        score -= 500; // Retira 500 pontos
         document.getElementById('score').innerHTML = score;
         triploCompra.style.display = 'none';
         quadruploCompra.style.display = 'block';
@@ -71,7 +73,7 @@ function tempoPorSegundo1() {
         window.alert('Valor Insuficiente');
     } else {
         TempoSegundo = 1;
-        score -= 500;
+        score -= 200;
         document.getElementById('score').innerHTML = score;
         UmPorSegundo.style.display = 'none';
         doisPorSegundo.style.display = 'block';
@@ -85,9 +87,23 @@ function tempoPorSegundo2() {
         window.alert('Valor insuficente');
     } else {
         TempoSegundo = 2;
-        score -= 1200
+        score -= 1200;
         document.getElementById('score').innerHTML = score;
         doisPorSegundo.style.display = 'none';
+        tresPorSegundo.style.display = 'block';
+        atualizarTempo();
+    }
+}
+
+// 3 pontos por segundo
+function tempoPorSegundo3() {
+    if (score < 1700) {
+        window.alert('Valor insuficiente');
+    } else {
+        TempoSegundo = 3;
+        score -= 1700;
+        document.getElementById('score').innerHTML = score;
+        tresPorSegundo.style.display = 'none';
         atualizarTempo();
     }
 }
@@ -98,6 +114,7 @@ btnTriploPontos.addEventListener('click', triplo);
 btnQuadruploPontos.addEventListener('click', quadruplo);
 btn1PorSegundo.addEventListener('click', tempoPorSegundo1);
 btn2PorSegundo.addEventListener('click', tempoPorSegundo2);
+btn3PorSegundo.addEventListener('click', tempoPorSegundo3);
 
 // Função para atualizar a pontuação
 function atualizarPontuacao() {
@@ -127,9 +144,10 @@ function atualizarPontuacao() {
     ponto 2 == triplo de pontos
     ponto 3 == quadruplo de pontos
 
-    tempo 0 == não aumenta nada
-    tempo 1 == aumenta 1 ponto por segundo
-    tempo 2 == aumenta 2 pontos por segundo
+    tempo 0 == Nada
+    tempo 1 == aumenta 1 por segundo
+    tempo 2 == aumenta 2 por segundo
+    tempo 3 == aumenta 3 por segundo
 */
 
 
@@ -138,20 +156,32 @@ function atualizarTempo() {
     switch (TempoSegundo) {
         case 0:
             break
-        case 1:
+
+        // 1 ponto por segundo
+        case 1: 
             clearInterval(intervalId); // Limpa o intervalo anterior
             intervalId = setInterval(() => {
                 score++;
                 document.getElementById('score').innerHTML = score;
-            }, 1000) // Ganha 1 ponto a cada segundo
+            }, 1000)
             break
+
+        // 2 ponto por segundo
         case 2:
             clearInterval(intervalId);  // Limpa o intervalo anterior
             intervalId = setInterval(() => {
                 score += 2;
                 document.getElementById('score').innerHTML = score;
-            }, 1000) // Ganha 2 ponto por segundo
+            }, 1000)
             break
+
+        // 3 ponto por segundo
+        case 3:
+            clearInterval(intervalId);
+            intervalId = setInterval(() => {
+                score += 3;
+                document.getElementById('score').innerHTML = score;
+            }, 1000); // Ganha 3 ponto por segundo
         default:
             break
     }
