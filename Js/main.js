@@ -1,4 +1,4 @@
-let score = -1;
+let score = 0;
 let btnDobroPontos = document.querySelector('button#btn_dobro');
 let dobroCompra = document.getElementById('dobro');
 let btnTriploPontos = document.querySelector("button#btn_triplo");
@@ -13,22 +13,12 @@ let tresPorSegundo = document.getElementById("3_por_segundo");
 let btn3PorSegundo = document.querySelector("button#btn_3segundo");
 let compras = document.querySelectorAll('div#compras');
 let mercado = document.querySelector("div#mercado");
-let botao = document.getElementById('circle');
 let ponto = 0;
 let TempoSegundo = 0;
 
 // Deixar visivel
 dobroCompra.style.display = "block";
 UmPorSegundo.style.display = "block"
-
-botao.addEventListener('click', somClick);
-
-const audioElement = document.getElementById('somClick');
-// Som do click
-function somClick() {
-    audioElement.play(); // Inicia a reprodução
-    audioElement.volume = 0.3; 
-}
 
 // Função de dobro de ponto
 function dobro() {
@@ -40,6 +30,8 @@ function dobro() {
         document.getElementById('score').innerHTML = score; // Atualiza o valor ao comprar
         dobroCompra.style.display = "none";
         triploCompra.style.display = "block";
+
+        salvarCache('pontoClick', '1');
     }
 }
 
@@ -53,6 +45,8 @@ function triplo() {
         document.getElementById('score').innerHTML = score;
         triploCompra.style.display = 'none';
         quadruploCompra.style.display = 'block';
+
+        salvarCache('pontoClick', '2');
     }
 }
 
@@ -64,6 +58,8 @@ function quadruplo() {
         score -= 1000; // Retira mil pontos
         document.getElementById('score').innerHTML = score;
         quadruploCompra.style.display = 'none';
+
+        salvarCache('pontoClick', '3');
     }
 }
 
@@ -78,6 +74,8 @@ function tempoPorSegundo1() {
         UmPorSegundo.style.display = 'none';
         doisPorSegundo.style.display = 'block';
         atualizarTempo();
+
+        salvarCache('pontoSegundo', '1');
     }
 }
 
@@ -92,6 +90,8 @@ function tempoPorSegundo2() {
         doisPorSegundo.style.display = 'none';
         tresPorSegundo.style.display = 'block';
         atualizarTempo();
+
+        salvarCache('pontoSegundo', '2');
     }
 }
 
@@ -105,6 +105,8 @@ function tempoPorSegundo3() {
         document.getElementById('score').innerHTML = score;
         tresPorSegundo.style.display = 'none';
         atualizarTempo();
+
+        salvarCache('pontoSegundo', '3');
     }
 }
 
@@ -185,4 +187,107 @@ function atualizarTempo() {
         default:
             break
     }
+}
+
+let apagar = document.getElementById('apagar');
+apagar.addEventListener('click', apagarCache);
+
+// Armazenar os Dados
+function salvarCache(chave, valor) {
+    localStorage.setItem(chave, valor);
+}
+
+// Recupera o cache
+function recuperarCache(chave) {
+    // Retornar o valor recuperado
+    return localStorage.getItem(chave);
+}
+
+function apagarCache() {
+    // Apaga todos os dados armazenados
+    localStorage.clear();
+    pontoClick = 0;
+    dobroCompra.style.display = "block";
+    triploCompra.style.display = "none";
+    quadruploCompra.style.display = "none";
+    ponto = 0;
+    score = 0;
+    document.getElementById('score').innerHTML = score;
+}
+
+let cacheScore = score;
+function atualizarCache() {
+    cacheScore = score;
+    salvarCache('cacheScore', cacheScore);
+}
+
+// A cada 1 segundo o cacheScore é atualizado
+setInterval(atualizarCache, 1000);
+
+// Recuperar o valor inicial se existir
+let valorArmazenado = recuperarCache('cacheScore');
+let pontoClick = recuperarCache('pontoClick');
+let pontoSegundo = recuperarCache('pontoSegundo');
+
+if (valorArmazenado) {
+    score = Number(valorArmazenado);
+    document.getElementById('score').innerHTML = Number(valorArmazenado);
+}
+
+switch (pontoClick) {
+    case '1': 
+        dobroCompra.style.display = "none";
+        triploCompra.style.display = "block";
+        quadruploCompra.style.display = "none";
+        ponto = 1;
+        break
+    case '2':
+        dobroCompra.style.display = "none";
+        triploCompra.style.display = "none";
+        quadruploCompra.style.display = "block";
+        ponto = 2;
+        break
+    case '3':
+        dobroCompra.style.display = "none";
+        triploCompra.style.display = "none";
+        quadruploCompra.style.display = "none";
+        ponto = 3;
+        break
+    default:
+        dobroCompra.style.display = "block";
+        triploCompra.style.display = "none";
+        quadruploCompra.style.display = "none";
+        ponto = 0;
+        break
+}
+
+switch (pontoSegundo) {
+    case '1':
+        UmPorSegundo.style.display = 'none';
+        doisPorSegundo.style.display = 'block';
+        tresPorSegundo.style.display = 'none';
+        TempoSegundo = 1;
+        atualizarTempo();
+        break
+    case '2':
+        UmPorSegundo.style.display = 'none';
+        doisPorSegundo.style.display = 'none';
+        tresPorSegundo.style.display = 'block';
+        TempoSegundo = 2;
+        atualizarTempo();
+        break
+    case '3':
+        UmPorSegundo.style.display = 'none';
+        doisPorSegundo.style.display = 'none';
+        tresPorSegundo.style.display = 'none';
+        TempoSegundo = 3;
+        atualizarTempo();
+        break
+    default:
+        UmPorSegundo.style.display = 'block';
+        doisPorSegundo.style.display = 'none';
+        tresPorSegundo.style.display = 'none';
+        TempoSegundo = 0;
+        atualizarTempo();
+        break
 }

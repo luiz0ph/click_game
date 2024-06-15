@@ -8,13 +8,36 @@
     <!-- Arquivo CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
-    <title>Click game</title>
+    <!-- Arquivo CSS para as config -->
+    <link rel="stylesheet" href="css/config.css">
+
+    <title>Click Game</title>
 </head>
-<body onload="atualizarPontuacao()">
+<body>
 
     <main>
         <div id="clicker">
-            <h1>Click-me</h1>
+            <span id="area_config">
+
+                <div id="config_click" onclick="openNav()">
+                    <img src="img/config.png" alt="Imagem de engrenagem" id="config" onclick="openNav()">
+                </div>
+
+                <!-- The overlay -->
+                <div id="myNav" class="overlay">
+
+                    <!-- Botão para fechar o menu -->
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                
+                    <!-- Overlay content -->
+                    <div class="overlay-content">
+                    <a href="som.html">Som</a>
+                    <a href="#" id="apagar">Excluir Progresso</a>
+                    </div>
+                </div>
+
+                <h1>Click-me</h1>
+            </span>
             <div id="sombra">
                 <!-- Circulo de click -->
                 <div id="circle" onclick="atualizarPontuacao()">
@@ -26,6 +49,9 @@
         </div>
 
         <div class="mercado">
+            <h2>Mercado</h2>
+
+            <hr>
 
             <!-- Dobro de pontos -->
             <div id="dobro" class="compras">
@@ -70,6 +96,8 @@
         </div>
     </main>
 
-    <script src="main.js"></script>
+    <script src="Js/main.js"></script> <!-- Principal -->
+    <script src="Js/som.js"></script> <!-- Som do click -->
+    <script src="Js/config.js"></script> <!-- Configurações -->
 </body>
 </html>
