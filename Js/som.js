@@ -1,9 +1,15 @@
 let botao = document.getElementById('circle');
 botao.addEventListener('click', somClick);
-const audioElement = document.getElementById('somClick');
+let audioElement = document.getElementById('somClick');
 
 // Som do click
 function somClick() {
     audioElement.play(); // Inicia a reprodução
-    audioElement.volume = 0.3; 
+    
+    let audio = document.getElementById('checkboxInput').checked;
+    if (audio == false) {
+        audioElement.volume = 0.3;
+    } else {
+        audioElement.volume = 0;
+    }
 }

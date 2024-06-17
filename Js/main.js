@@ -118,6 +118,11 @@ btn1PorSegundo.addEventListener('click', tempoPorSegundo1);
 btn2PorSegundo.addEventListener('click', tempoPorSegundo2);
 btn3PorSegundo.addEventListener('click', tempoPorSegundo3);
 
+
+const conquista1 = 1000;
+const conquista2 = 2000;
+const conquista3 = 5000;
+
 // Função para atualizar a pontuação
 function atualizarPontuacao() {
     switch (ponto) {
@@ -138,6 +143,24 @@ function atualizarPontuacao() {
             break
     }
     document.getElementById('score').innerHTML = score;
+
+    if (score == conquista1) {
+        alert('Conquista desbloqueada 1000 pontos');
+        score = 1000;
+        document.getElementById('score').innerHTML = score;
+    }
+
+    if (score == conquista2) {
+        alert('Conquista desbloqueada 2000 pontos');
+        score = 2000;
+        document.getElementById('score').innerHTML = score;
+    }
+
+    if (score == conquista3) {
+        alert('Conquista desbloqueada 5000 pontos');
+        score = 5000;
+        document.getElementById('score').innerHTML = score;
+    }
 }
 
 /*
@@ -186,6 +209,24 @@ function atualizarTempo() {
             }, 1000); // Ganha 3 ponto por segundo
         default:
             break
+    }
+
+    if (score == conquista1) {
+        alert('Conquista desbloqueada 1000 pontos');
+        score = 1000;
+        document.getElementById('score').innerHTML = score;
+    }
+
+    if (score == conquista2) {
+        alert('Conquista desbloqueada 2000 pontos');
+        score = 2000;
+        document.getElementById('score').innerHTML = score;
+    }
+
+    if (score == conquista3) {
+        alert('Conquista desbloqueada 5000 pontos');
+        score = 5000;
+        document.getElementById('score').innerHTML = score;
     }
 }
 

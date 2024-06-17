@@ -148,7 +148,7 @@ button {
 #area_config > h1 {
     flex-grow: 1;
     text-align: center;
-    transform: translate(-9%, 0px);
+    transform: translate(-12%, 0px);
 }
 
 @media screen  and (min-width: 1000px){
